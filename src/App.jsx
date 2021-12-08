@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./styles.css";
 import { InputName } from "./components/InputName";
 import { Greeting } from "./components/Greeting";
 
 export const App = () => {
   const [inputName, setInputName] = useState("");
-  const [MessageShowFlag, setMessageShowFlag] = useState(false);
   const onChangeName = (event) => setInputName(event.target.value);
+  const [count, setCount] = useState(0);
+  const [changeName, setChangeName] = useState("");
+
   const onClickButton = () => {
     if (inputName === "") return;
-    setInputName(inputName);
-    setMessageShowFlag(!MessageShowFlag);
+    setCount(count + 1);
+    setChangeName(inputName);
+    setInputName("");
   };
 
   return (
@@ -18,10 +21,11 @@ export const App = () => {
       <InputName
         onChange={onChangeName}
         onClick={onClickButton}
-        message={MessageShowFlag}
         inputName={inputName}
+        count={count}
       />
-      <Greeting inputName={inputName} message={MessageShowFlag} />
+
+      <Greeting count={count} changeName={changeName} />
     </>
   );
 };

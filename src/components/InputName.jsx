@@ -1,7 +1,13 @@
 import React from "react";
 
 export const InputName = (props) => {
-  const { onChange, onClick, message, inputName } = props;
+  const { onChange, onClick, count, inputName } = props;
+  let buttonText;
+  if (count < 1) {
+    buttonText = "だよ！";
+  } else {
+    buttonText = "編集";
+  }
   return (
     <div className="inputName">
       <p>名前を入力してね！</p>
@@ -9,11 +15,8 @@ export const InputName = (props) => {
         placeholder="あなたの名前は？"
         value={inputName}
         onChange={onChange}
-        disabled={message}
       />
-      <button disabled={message} onClick={onClick}>
-        だよ！
-      </button>
+      <button onClick={onClick}>{buttonText}</button>
     </div>
   );
 };
